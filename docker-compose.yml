@@ -7,11 +7,17 @@ services:
       - db
     ports:
       - "5000:5000"
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=tron
+      - MYSQL_PASSWORD=secret
+      - MYSQL_DATABASE=movie
     volumes:
       - ./api_client:/api_client
   db:
     image: mariadb:10.4
     environment:
+      - MYSQL_HOST=db
       - MYSQL_ROOT_PASSWORD=portal
       - MYSQL_USER=tron
       - MYSQL_PASSWORD=secret
