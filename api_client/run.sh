@@ -1,1 +1,1 @@
-docker run --rm -td -p 5000:5000 --name api_client api_client 
+docker run --rm -td -p 5000:5000 --name api-client api-client 

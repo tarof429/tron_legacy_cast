@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t api_client .
+docker build -t tarof429/api-client .
