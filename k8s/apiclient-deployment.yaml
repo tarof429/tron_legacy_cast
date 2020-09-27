@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: apiclient-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       component: apiclient-label

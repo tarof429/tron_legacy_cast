@@ -16,9 +16,9 @@ spec:
         - name: mariadb-storage
           persistentVolumeClaim:
             claimName: database-persistent-volume-claim
-        - name: mysql-initdb
+        - name: mariadb-initdb
           configMap:
-            name: mysql-initdb-config
+            name: mariadb-initdb-config
       containers:
         - name: mariadb
           image: mariadb:10.4
@@ -28,7 +28,7 @@ spec:
             - name: mariadb-storage
               mountPath: /var/lib/mysql/data
               subPath: db_data
-            - name: mysql-initdb
+            - name: mariadb-initdb
               mountPath: /docker-entrypoint-initdb.d
           env:
             - name: MYSQL_HOST
