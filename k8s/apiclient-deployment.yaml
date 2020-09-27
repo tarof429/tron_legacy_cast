@@ -12,18 +12,37 @@ spec:
       labels:
         component: apiclient-label
     spec:
+      volumes:
+      - name: mariadb-configmap-volume
+        configMap:
+          name: mariadb-configmap
       containers:
         - name: apiclient 
           image: tarof429/api-client:latest
           imagePullPolicy: Never
+          volumeMounts:
+            - name: mariadb-configmap-volume
+              mountPath: /etc/config
           ports:
             - containerPort: 5000
           env:
             - name: MYSQL_HOST
-              value: mariadb-cluster-ip-service
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqlhost
             - name: MYSQL_USER
-              value: tron
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqluser
             - name: MYSQL_PASSWORD
-              value: secret
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqlpassword
             - name: MYSQL_DATABASE
-              value: movie
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqldatabase
