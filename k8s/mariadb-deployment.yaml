@@ -19,6 +19,9 @@ spec:
         - name: mariadb-initdb
           configMap:
             name: mariadb-initdb-config
+        - name: mariadb-configmap-volume
+          configMap:
+            name: mariadb-configmap
       containers:
         - name: mariadb
           image: mariadb:10.4
@@ -30,14 +33,26 @@ spec:
               subPath: db_data
             - name: mariadb-initdb
               mountPath: /docker-entrypoint-initdb.d
+            - name: mariadb-configmap-volume
+              mountPath: /etc/config
           env:
             - name: MYSQL_HOST
               value: localhost
             - name: MYSQL_ROOT_PASSWORD
               value: portal
             - name: MYSQL_USER
-              value: tron
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqluser
             - name: MYSQL_PASSWORD
-              value: secret
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqlpassword
             - name: MYSQL_DATABASE
-              value: movie
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqldatabase
+
