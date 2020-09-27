@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: envclient-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: envclient-label
+  template:
+    metadata:
+      labels:
+        component: envclient-label
+    spec:
+      volumes:
+      - name: mariadb-configmap-volume
+        configMap:
+          name: mariadb-configmap
+      containers:
+        - name: envclient 
+          image: tarof429/env-client:latest
+          imagePullPolicy: Never
+          volumeMounts:
+            - name: mariadb-configmap-volume
+              mountPath: /etc/config
+          env:
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqlhost
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqluser
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqlpassword
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: mysqldatabase
