@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apiclient-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: apiclient-label
+  template:
+    metadata:
+      labels:
+        component: apiclient-label
+    spec:
+      containers:
+        - name: apiclient 
+          image: tarof429/api-client:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MYSQL_HOST
+              value: mariadb-cluster-ip-service
+            - name: MYSQL_USER
+              value: tron
+            - name: MYSQL_PASSWORD
+              value: secret
+            - name: MYSQL_DATABASE
+              value: movie
