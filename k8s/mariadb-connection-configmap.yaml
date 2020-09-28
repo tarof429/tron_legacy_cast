@@ -5,5 +5,4 @@ metadata:
 data:
   mysqlhost: mariadb-cluster-ip-service
   mysqluser: tron
-  mysqlpassword: secret
   mysqldatabase: movie

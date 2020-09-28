@@ -39,7 +39,10 @@ spec:
             - name: MYSQL_HOST
               value: localhost
             - name: MYSQL_ROOT_PASSWORD
-              value: portal
+              valueFrom: 
+                secretKeyRef:
+                  name: dbsecrets
+                  key: MYSQL_ROOT_PASSWORD
             - name: MYSQL_USER
               valueFrom:
                 configMapKeyRef:
@@ -47,9 +50,9 @@ spec:
                   key: mysqluser
             - name: MYSQL_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: mariadb-configmap
-                  key: mysqlpassword
+                secretKeyRef:
+                  name: dbsecrets
+                  key: MYSQL_PASSWORD
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:

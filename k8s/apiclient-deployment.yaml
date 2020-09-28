@@ -38,9 +38,9 @@ spec:
                   key: mysqluser
             - name: MYSQL_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: mariadb-configmap
-                  key: mysqlpassword
+                secretKeyRef:
+                  name: dbsecrets
+                  key: MYSQL_PASSWORD
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:
