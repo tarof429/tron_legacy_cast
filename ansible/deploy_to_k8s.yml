@@ -7,11 +7,17 @@
       git:
         repo: https://github.com/tarof429/tron_legacy_cast
         dest: "{{ checkout_dir }}"
+    
+    - name: Create DB secrets
+      command: sh ./create-secrets-noprompt.sh
+      args:
+        creeates: k8s/secrets.yaml
 
     - name: Apply deployments
       command: kubectl apply -f k8s
       args:
         chdir: "{{ checkout_dir }}"
+   
     - name: Update deployments
       command: "kubectl set image deployments/apiclient-deployment apiclient=tarof429/api-client:{{ SHA }}"
       args:
