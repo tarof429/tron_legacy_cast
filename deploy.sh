@@ -9,4 +9,4 @@ docker push tarof429/tron_legacy_cast:latest
 docker push tarof429/tron_legacy_cast:${SHA}
 
 echo "Cleaning up images"
-docker rmi tarof429/tron_legacy_cast:latest api_client tarof429/tron_legacy_cast:${SHA}
+docker rmi tarof429/tron_legacy_cast:latest tarof429/tron_legacy_cast:${SHA}
