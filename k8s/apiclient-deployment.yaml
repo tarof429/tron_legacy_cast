@@ -19,7 +19,7 @@ spec:
       containers:
         - name: apiclient 
           image: tarof429/api-client:latest
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           volumeMounts:
             - name: mariadb-configmap-volume
               mountPath: /etc/config
