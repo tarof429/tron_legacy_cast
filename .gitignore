@@ -3,3 +3,4 @@
 */venv
 k8s/secrets.yaml
 ansible/hosts
+ansible/ansible.cfg
