@@ -1,8 +1,10 @@
 pipeline {
-    agent none
+    agent { label 'master' }
+
     environment {
-         SHA = $(git rev-parse HEAD)
+        SHA = "${sh(script: 'git rev-parse HEAD', returnStdout: true).trim()}"
     }
+    
     stages {
         stage('Build image') {
             agent { label 'milkshake' } 
