@@ -2,7 +2,6 @@
 - hosts: zaxman
   vars:
     checkout_dir: /tmp/tron_legacy_cast
-    sha: lookup('env', 'SHA')
   tasks:
     - name: Checkout code
       git:
@@ -14,6 +13,6 @@
       args:
         chdir: "{{ checkout_dir }}"
     - name: Update deployments
-      command: "kubectl set image deployments/apiclient-deployment apiclient=tarof429/apiclient-deployment:{{ sha }}"
+      command: "kubectl set image deployments/apiclient-deployment apiclient=tarof429/apiclient-deployment:{{ SHA }}"
       args:
         chdir: "{{ checkout_dir }}"
