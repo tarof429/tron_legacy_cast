@@ -1,21 +1,22 @@
 pipeline {
-    agent { label 'master' }
-
-    environment {
-        SHA = "${sh(script: 'git rev-parse HEAD', returnStdout: true).trim()}"
-    }
+    agent { none }
     
     stages {
         stage('Build image') {
-            agent { label 'milkshake' } 
-            steps {
-                echo "Building git revision ${SHA}"
-                // git branch: 'master',
-                //     url: 'https://github.com/tarof429/tron_legacy_cast.git'
+            agent { label 'milkshake' }
 
-                // dir('tron_legacy_cast/api_client') {
-                //     sh returnStatus: true, script: 'docker build -t tarof429/tron_legacy_cast:latest .'
-                // }
+            steps {
+
+                git branch: 'master',
+                    url: 'https://github.com/tarof429/tron_legacy_cast.git'
+                
+                dir('tron_legacy_cast/api_client') {
+                    environment {
+                        SHA = "${sh(script: 'git rev-parse HEAD', returnStdout: true).trim()}"
+                    }
+                    echo "Building git revision ${SHA}"
+                    sh returnStatus: true, script: 'docker build -t tarof429/tron_legacy_cast:latest .'
+                }
             }
         }
     }
