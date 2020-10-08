@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3-alpine
 
 WORKDIR /src
 COPY api_client_lib.py client.py standalone_client.py requirements.txt ./
