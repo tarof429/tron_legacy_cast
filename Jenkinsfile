@@ -16,10 +16,17 @@ pipeline {
                     url: 'https://github.com/tarof429/tron_legacy_cast.git'                
 
                 script {
-                    withEnv(["SHA=${env.GIT_COMMIT}", "DOCKER_USERNAME=${env.DOCKER_USERNAME}", "DOCKER_PASSWORD=${env.DOCKER_PASSWORD}"]) {
-                        status = sh(returnStatus: true, script: "sh ./deploy.sh")
-                        if (status != 0) {
-                            error("Deployment failed")
+                    withEnv(["SHA=${env.GIT_COMMIT}") {
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                            status = sh(returnStatus: true, script: "echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin")
+                            if (status != 0) {
+                                error("Bad status!")
+                            }
+
+                            status = sh(returnStatus: true, script: "sh ./deploy.sh")
+                            if (status != 0) {
+                                error("Deployment failed")
+                            }
                         }
                     }
                 }
