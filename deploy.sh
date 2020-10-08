@@ -10,3 +10,7 @@ docker push tarof429/tron_legacy_cast:${SHA}
 
 echo "Cleaning up images"
 docker rmi tarof429/tron_legacy_cast:latest tarof429/tron_legacy_cast:${SHA}
+
+echo "Running ansible scripts"
+cd ansible
+ansible-playbook deploy_to_k8s.yml

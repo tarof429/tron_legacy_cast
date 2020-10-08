@@ -1,0 +1,19 @@
+---
+- hosts: zaxman
+  vars:
+    checkout_dir: /tmp/tron_legacy_cast
+    sha: lookup('env', 'SHA')
+  tasks:
+    - name: Checkout code
+      git:
+        repo: https://github.com/tarof429/tron_legacy_cast
+        dest: "{{ checkout_dir }}"
+
+    - name: Apply deployments
+      command: kubectl apply -f k8s
+      args:
+        chdir: "{{ checkout_dir }}"
+    - name: Update deployments
+      command: "kubectl set image deployments/apiclient-deployment apiclient=tarof429/apiclient-deployment:{{ sha }}"
+      args:
+        chdir: "{{ checkout_dir }}"
