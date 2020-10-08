@@ -11,7 +11,7 @@
     - name: Create DB secrets
       command: sh ./create-secrets-noprompt.sh
       args:
-        creeates: k8s/secrets.yaml
+        creates: k8s/secrets.yaml
 
     - name: Apply deployments
       command: kubectl apply -f k8s
