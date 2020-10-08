@@ -13,6 +13,6 @@
       args:
         chdir: "{{ checkout_dir }}"
     - name: Update deployments
-      command: "kubectl set image deployments/apiclient-deployment apiclient=tarof429/apiclient-deployment:{{ SHA }}"
+      command: "kubectl set image deployments/apiclient-deployment apiclient=tarof429/api-client:{{ SHA }}"
       args:
         chdir: "{{ checkout_dir }}"
