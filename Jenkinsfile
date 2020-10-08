@@ -15,13 +15,9 @@ pipeline {
                     echo "Building git revision ${env.SHA}"
                 }
                 
-                dir('api_client') {
-                    script {
-                        pwd = sh(script: 'pwd', returnStdout: true).trim()
-                        echo "pwd: ${pwd}"
-                        status = sh(returnStatus: true, script: 'docker build -t tarof429/tron_legacy_cast:latest .')
-                        echo "Status: ${status}"
-                    }
+                dockerfile {
+                    dir 'api_client'
+                    label 'tarof429/tron_legacy_cast:latest'
                 }
             }
         }
