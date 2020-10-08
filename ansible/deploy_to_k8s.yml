@@ -11,6 +11,7 @@
     - name: Create DB secrets
       command: sh ./create-secrets-noprompt.sh
       args:
+        chdir: "{{ checkout_dir }}"
         creates: k8s/secrets.yaml
 
     - name: Apply deployments
