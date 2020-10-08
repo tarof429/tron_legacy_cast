@@ -16,4 +16,5 @@ INSERT INTO cast (name, movie_name) VALUES
 ('Michael Sheen', 'Castor'),
 ('James Frain', 'Jarvis'),
 ('Beau Garrett', 'Gem'),
-('Daft Punk', 'Daft Punk');
+('Daft Punk', 'Daft Punk'),
+('Serinda Swan','Siren #2') ;
