@@ -38,6 +38,11 @@ class ApiClient:
             result = cursor.fetchall()
             return json.dumps(result) 
 
+    def insert(self, name, movie_name):
+        with self.conn.cursor() as cursor:
+            sql = "INSERT INTO `cast` (`name`, `movie_name`) VALUES (%s, %s)"
+            cursor.execute(sql, (name, movie_name))
+
     def close_connection(self):
         self.conn.close()
 

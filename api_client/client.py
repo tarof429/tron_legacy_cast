@@ -62,5 +62,15 @@ def get_by_movie_name(name):
     
     return json.dumps(result)
 
+@app.route('/create/<name>/<movie_name>')
+def create(name=None, movie_name=None):
+    client = getClient()
+  
+    try:
+        client.connect()
+        client.insert(name, movie_name)
+    finally:
+        client.close_connection()
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

@@ -40,5 +40,10 @@ if __name__ == '__main__':
         result = client.fetchByMovieName('Jarvis')
         print (json.dumps(result))
 
+        print(25 * '*')
+        
+        client.create('Yoda', 'The Jedi Master')
+        result = client.fetchAll()
+        print (json.dumps(result))
     finally:
         client.close_connection()
