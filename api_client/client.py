@@ -62,8 +62,8 @@ def get_by_movie_name(name):
     
     return json.dumps(result)
 
-@app.route('/create/<name>/<movie_name>')
-def create(name=None, movie_name=None):
+@app.route('/create/<name>/<movie_name>', methods=['POST'])
+def create(name, movie_name):
     client = getClient()
   
     try:
