@@ -16,7 +16,7 @@ pipeline {
                     url: 'https://github.com/tarof429/tron_legacy_cast.git'                
 
                 script {
-                    withEnv(["SHA=${env.GIT_COMMIT}"]) {
+                    withEnv(["SHA=${env.GIT_COMMIT}", "MYSQL_ROOT_PASSWORD_READ=${env.MYSQL_ROOT_PASSWORD_READ}", "MYSQL_PASSWORD_READ=${env.MYSQL_PASSWORD_READ}"]) {
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                             status = sh(returnStatus: true, script: "echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin")
                             if (status != 0) {
