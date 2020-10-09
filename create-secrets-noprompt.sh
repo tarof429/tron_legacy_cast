@@ -1,14 +1,21 @@
 #!/bin/sh
 
-MYSQL_ROOT_PASSWORD_READ=${MYSQL_ROOT_PASSWORD_READ:-}
-MYSQL_PASSWORD_READ=${MYSQL_PASSWORD_READ:-}
-
-if [ "$MYSQL_ROOT_PASSWORD_READ" = "" ] || [ "$MYSQL_PASSWORD_READ" = "" ]; then
-    echo "Error: Please set MYSQL_ROOT_PASSWORD_READ and MYSQL_PASSWORD_READ before running this script."
-    exit 1
+# Don't generate the secrets file if it already exists
+if [ -f k8s/secrets.yaml ]; then
+    exit 0
 fi
 
+# Workaround for not knowing how to pass these values from ansible
+MYSQL_ROOT_PASSWORD_READ=notsosecret
+MYSQL_PASSWORD_READ=pass
 
+# MYSQL_ROOT_PASSWORD_READ=${MYSQL_ROOT_PASSWORD_READ:-}
+# MYSQL_PASSWORD_READ=${MYSQL_PASSWORD_READ:-}
+
+# if [ "$MYSQL_ROOT_PASSWORD_READ" = "" ] || [ "$MYSQL_PASSWORD_READ" = "" ]; then
+#     echo "Error: Please set MYSQL_ROOT_PASSWORD_READ and MYSQL_PASSWORD_READ before running this script."
+#     exit 1
+# fi
 
 echo "Generating  k8s/secrets.yaml..."
 
