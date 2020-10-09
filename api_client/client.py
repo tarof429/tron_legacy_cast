@@ -21,7 +21,7 @@ def getClient():
 
 @app.route('/hello')
 def hello_world():
-    return 'Hello!\n'
+    return 'Hello from api-client!\n'
 
 @app.route('/all')
 def get_all():
