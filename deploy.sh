@@ -13,4 +13,5 @@ docker rmi tarof429/api-client:latest tarof429/api-client:${SHA}
 
 echo "Running ansible scripts"
 cd ansible
+echo "Running ansible-playbook -e SHA=${SHA} MYSQL_ROOT_PASSWORD_READ=${MYSQL_ROOT_PASSWORD_READ} MYSQL_PASSWORD_READ=${MYSQL_PASSWORD_READ} deploy_to_k8s.yml"
 ansible-playbook -e "SHA=${SHA} MYSQL_ROOT_PASSWORD_READ=${MYSQL_ROOT_PASSWORD_READ} MYSQL_PASSWORD_READ=${MYSQL_PASSWORD_READ}" deploy_to_k8s.yml
