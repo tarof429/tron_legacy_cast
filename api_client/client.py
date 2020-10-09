@@ -49,6 +49,11 @@ def get_by_name(name):
     
     return json.dumps(result)
 
+# An alias for get_by_name
+@app.route('/n/<name>')
+def get_n(name):
+    return get_by_name(name)
+
 @app.route('/movie_name/<name>')
 def get_by_movie_name(name):
 
@@ -61,16 +66,6 @@ def get_by_movie_name(name):
         client.close_connection()
     
     return json.dumps(result)
-
-@app.route('/create/<name>/<movie_name>', methods=['POST'])
-def create(name, movie_name):
-    client = getClient()
-  
-    try:
-        client.connect()
-        client.insert(name, movie_name)
-    finally:
-        client.close_connection()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
